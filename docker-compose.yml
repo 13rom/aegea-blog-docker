@@ -10,6 +10,7 @@ services:
 
   e2:
     build: .
+    image: zebradil/docker-e2
     environment:
       - VIRTUAL_HOST
     links:

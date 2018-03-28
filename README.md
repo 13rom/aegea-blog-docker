@@ -9,7 +9,10 @@ This container plays nicely with https://github.com/jwilder/nginx-proxy nginx do
 Navigate to the project directory and copy `example.env` → `.env`, then change values in the last one (optional).
 After that run:
 
-    docker-compose up -d
+```sh
+$ docker-compose pull
+$ docker-compose up -d
+```
 
 Open http://localhost (if you changed `PORT` value in `.env` file to something else, specify this port implicitly, for ex.: http://localhost:8080) in browser and fill configuration form with the values from `.env` file.
 **Replace `localhost` → `db` in "server" field.**
