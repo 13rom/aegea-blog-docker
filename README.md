@@ -14,7 +14,7 @@ After that run:
 Open http://localhost (if you changed `PORT` value in `.env` file to something else, specify this port implicitly, for ex.: http://localhost:8080) in browser and fill configuration form with the values from `.env` file.
 **Replace `localhost` → `db` in "server" field.**
 
-![Aegeya configuration screenshot](/docs/install-screenshot.png)
+<img src="docs/install-screenshot.png" width="644">
 
 This docker-compose.yml is configured to store user data on host machine in the following directories:
 
