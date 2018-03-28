@@ -4,28 +4,29 @@ Official web page: [RU](https://blogengine.ru) or [EN](http://blogengine.me/).
 
 This container plays nicely with https://github.com/jwilder/nginx-proxy nginx docker container.
 
-## Build
+## Basic usage
 
-Change VERSION in docker-compose.yml to build new Aegea blog engine version and run
-
-    docker-compose build
-
-You can skip build process and use instead
-
-    docker-compose pull
-
-## Usage
+Navigate to the project directory and copy `example.env` → `.env`, then change values in the last one (optional).
+After that run:
 
     docker-compose up -d
 
-Open http://localhost in browser and proceed with instructions. Use root as username, egeya as database name and password.
+Open http://localhost (if you changed `PORT` value in `.env` file to something else, specify this port implicitly, for ex.: http://localhost:8080) in browser and fill configuration form with the values from `.env` file.
+**Replace `localhost` → `db` in "server" field.**
 
-![Aegeya installation screenshot](/docs/install-screenshot.png)
+![Aegeya configuration screenshot](/docs/install-screenshot.png)
 
-This docker-compose.yml stores mysql database in persistent volume ./data/mysql, and blog settings stored in 
+This docker-compose.yml is configured to store user data on host machine in the following directories:
 
-- ./data/pictures
-- ./data/themes
-- ./data/user
+- `./data/mysql`
+- `./data/pictures`
+- `./data/themes`
+- `./data/user`
 
-to survive blog data between container recreation.
+This approach allows to persist blog data between container recreation.
+
+## Build
+
+Default Aegea version is 3254. If you want to change the version, run the following command:
+
+    docker-compose build --build-arg VERSION=<NEW_BERSION_NUMBER>
