@@ -4,6 +4,7 @@ ARG VERSION=3254
 
 RUN apt-get update \
  && apt-get install -y \
+        libzip-dev \
         libpng-dev \
         libjpeg-dev \
         libmcrypt-dev \
