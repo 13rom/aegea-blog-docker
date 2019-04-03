@@ -2,7 +2,7 @@ FROM php:7-apache
 
 ARG VERSION=3254
 
-RUN apt-get update \ 
+RUN apt-get update \
  && apt-get install -y \
         libzip-dev \
         libpng-dev \
