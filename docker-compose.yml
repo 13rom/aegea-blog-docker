@@ -1,23 +1,31 @@
-version: '2.3'
-services:
-  db:
-    image: mariadb
-    environment:
-      - MYSQL_DATABASE
-      - MYSQL_ROOT_PASSWORD
-    volumes:
-      - ./data/mysql:/var/lib/mysql
+version: "3"
 
-  e2:
-    build: .
-    image: zebradil/docker-e2
+services:
+  mariadb:
+    image: mariadb
+    restart: unless-stopped
     environment:
-      - VIRTUAL_HOST
-    links:
-      - db
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ./data/mysql:/var/lib/mysql:delegated
+
+  blog:
+    container_name: blog
+    image: 13rom/aegea-docker
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        AEGEA_VERSION: ${AEGEA_VERSION}
+    restart: unless-stopped
+    environment:
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+    depends_on:
+      - mariadb
     ports:
       - ${PORT}:80
     volumes:
-      - ./data/themes:/var/www/html/themes
-      - ./data/pictures:/var/www/html/pictures
-      - ./data/user:/var/www/html/user
+      - ./data/themes:/var/www/html/themes:delegated
+      - ./data/pictures:/var/www/html/pictures:delegated
+      - ./data/user:/var/www/html/user:delegated
