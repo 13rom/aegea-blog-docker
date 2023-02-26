@@ -1,17 +1,17 @@
 FROM php:7-apache
 
-ARG AEGEA_VERSION=3873
+ARG AEGEA_VERSION=4079
 
-RUN apt-get update \
-       && apt-get install -y \
-       libzip-dev \
+RUN apt-get update && apt-get install -y \
+       libfreetype6-dev \
+       libjpeg62-turbo-dev \
        libpng-dev \
-       libjpeg-dev \
-       libmcrypt-dev \
+       libonig-dev \
        unzip \
-       && rm -rf /var/lib/apt/lists/* \
-       && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
-       && docker-php-ext-install gd mbstring mysqli pdo_mysql zip
+       && docker-php-ext-configure gd --with-freetype --with-jpeg \
+       && docker-php-ext-install -j$(nproc) gd mbstring pdo_mysql mysqli \
+       && docker-php-source delete \
+       && rm -rf /var/lib/apt/lists/*
 
 RUN a2enmod rewrite actions
 
