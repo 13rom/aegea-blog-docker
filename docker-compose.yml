@@ -21,8 +21,8 @@ services:
       - mariadb
     ports:
       - ${PORT}:80
-    user: "${UID}:${GID}"
+    user: ${UID}:${GID}
     volumes:
-      - ./data/themes:/var/www/html/themes:delegated
+      # - ./data/themes:/var/www/html/themes:delegated
       - ./data/pictures:/var/www/html/pictures:delegated
       - ./data/user:/var/www/html/user:delegated
