@@ -2,6 +2,7 @@ version: "3"
 
 services:
   mariadb:
+    container_name: aegea-db
     image: mariadb
     restart: unless-stopped
     environment:
@@ -11,13 +12,8 @@ services:
       - ./data/mysql:/var/lib/mysql:delegated
 
   blog:
-    container_name: blog
-    image: 13rom/aegea-docker
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        AEGEA_VERSION: ${AEGEA_VERSION}
+    container_name: aegea-blog
+    image: 13rom/aegea:${AEGEA_VERSION}
     restart: unless-stopped
     environment:
       VIRTUAL_HOST: ${VIRTUAL_HOST}
@@ -25,6 +21,7 @@ services:
       - mariadb
     ports:
       - ${PORT}:80
+    user: "${UID}:${GID}"
     volumes:
       - ./data/themes:/var/www/html/themes:delegated
       - ./data/pictures:/var/www/html/pictures:delegated
