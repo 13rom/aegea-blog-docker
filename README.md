@@ -107,3 +107,6 @@ This docker-compose.yml is configured to store user data on host machine in the 
 - `./data/user`
 
 This approach allows to persist blog data between container recreation.
+
+---
+Docker Hub repository: https://hub.docker.com/r/13rom/aegea
